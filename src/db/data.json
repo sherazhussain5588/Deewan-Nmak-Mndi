@@ -1,0 +1,210 @@
+{
+  "users": [
+    {
+      "id": "u1",
+      "name": "Deewan Admin",
+      "email": "admin@deewan.com",
+      "phone": "+92 300 1234567",
+      "passwordHash": "$2b$10$biACgVbdtOuGds3Ym6BOM.9GbjxR8y0BdPwLxTm9vj8L.VSOX9SoK",
+      "role": "admin"
+    },
+    {
+      "id": "u2",
+      "name": "Sheraz Hussain",
+      "email": "customer@deewan.com",
+      "phone": "+92 312 9876543",
+      "passwordHash": "$2b$10$biACgVbdtOuGds3Ym6BOM.N65qKGOnpzaG58wnQcT1ZBDkarKdObm",
+      "role": "customer"
+    }
+  ],
+  "menu": [
+    {
+      "id": "m1",
+      "name": "Shinwari Mutton Tikka",
+      "price": 1150,
+      "category": "BBQ",
+      "image": "/src/assets/images/mutton_tikka_1784129551509.jpg",
+      "description": "Charcoal-grilled Peshawari Mutton Tikka skewers, lightly salted and grilled on open coal for authentic Namak Mandi flavour."
+    },
+    {
+      "id": "m2",
+      "name": "Peshawari Chapli Kabab",
+      "price": 450,
+      "category": "BBQ",
+      "image": "/src/assets/images/chapli_kabab_1784129571254.jpg",
+      "description": "Traditional minced beef kabab with chopped onions, tomatoes, pomegranate seeds, and native spices, fried on flat griddle."
+    },
+    {
+      "id": "m3_3",
+      "name": "Chicken Malai Boti",
+      "price": 820,
+      "category": "BBQ",
+      "image": "/src/assets/images/chicken_malai_boti_1784193575959.jpg",
+      "description": "Succulent, melt-in-mouth boneless chicken boti marinated in fresh heavy cream, yogurt, and green cardamom."
+    },
+    {
+      "id": "m4",
+      "name": "Namak Mandi Mutton Karahi",
+      "price": 1850,
+      "category": "Karahi",
+      "image": "/src/assets/images/mutton_karahi_1784187080903.jpg",
+      "description": "Authentic Namak Mandi Mutton Karahi cooked in animal fat with only salt, ginger, tomatoes, and green chilies."
+    },
+    {
+      "id": "m5",
+      "name": "Chicken Shinwari Karahi",
+      "price": 1250,
+      "category": "Karahi",
+      "image": "/src/assets/images/chicken_karahi_1784187101787.jpg",
+      "description": "Shinwari-style chicken karahi cooked on high flame with tomatoes, green chilies, and fresh black pepper."
+    },
+    {
+      "id": "m5_4",
+      "name": "Traditional Beef Karahi",
+      "price": 1450,
+      "category": "Karahi",
+      "image": "/src/assets/images/traditional_beef_karahi_1784193076888.jpg",
+      "description": "Tender boneless beef chunks slow-cooked with fresh ginger, garlic, ripe tomatoes, and freshly ground spices."
+    },
+    {
+      "id": "m6",
+      "name": "Special Roghni Naan",
+      "price": 60,
+      "category": "Roti",
+      "image": "/src/assets/images/roghni_naan_tandoor_1784185710299.jpg",
+      "description": "Tandoori naan topped with sesame seeds and brushed with melted butter, baked live in clay tandoor."
+    },
+    {
+      "id": "m7_2",
+      "name": "Garlic Coriander Naan",
+      "price": 90,
+      "category": "Roti",
+      "image": "/src/assets/images/garlic_naan_1784187142918.jpg",
+      "description": "Freshly tandoor-baked naan infused with aromatic minced garlic and fresh coriander leaves, brushed with pure ghee."
+    },
+    {
+      "id": "m7_3",
+      "name": "Sada Tandoori Naan",
+      "price": 40,
+      "category": "Roti",
+      "image": "/src/assets/images/tandoori_naan_1784192537211.jpg",
+      "description": "Plain, fresh clay-oven baked traditional naan with light golden char marks and puffy bubbles."
+    },
+    {
+      "id": "m8",
+      "name": "Traditional Sweet Lassi",
+      "price": 180,
+      "category": "Drinks",
+      "image": "/src/assets/images/sweet_lassi_1784187162495.jpg",
+      "description": "Creamy yogurt drink blended with sugar, ice, and dynamic thick pakistani milk."
+    },
+    {
+      "id": "m9_3",
+      "name": "Karak Chai (Special Doodh Patti)",
+      "price": 120,
+      "category": "Drinks",
+      "image": "/src/assets/images/karak_chai_1784192272196.jpg",
+      "description": "Rich, strong cardamom tea slow-brewed with fresh whole milk in traditional style."
+    },
+    {
+      "id": "m9_5",
+      "name": "Gourmet Soft Drinks",
+      "price": 90,
+      "category": "Drinks",
+      "image": "/src/assets/images/soft_drinks_1784192303831.jpg",
+      "description": "Your choice of classic chilled carbonated soft drinks (Pepsi, Sprite, 7Up, or Fanta) served with ice."
+    },
+    {
+      "id": "m10",
+      "name": "Special Chicken Biryani",
+      "price": 450,
+      "category": "Rice",
+      "image": "/src/assets/images/chicken_biryani_1784193875562.jpg",
+      "description": "Fragrant long-grain basmati rice cooked with layered spiced chicken, potatoes, saffron, and mint, in authentic Karachi style."
+    },
+    {
+      "id": "m10_2",
+      "name": "Peshawari Kabuli Pulao",
+      "price": 650,
+      "category": "Rice",
+      "image": "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?auto=format&fit=crop&q=80&w=800",
+      "description": "Authentic Afghan/Peshawari style steamed rice cooked in rich lamb stock, crowned with sweet caramelized carrots and black raisins."
+    },
+    {
+      "id": "m11_2",
+      "name": "Special Podina Raita",
+      "price": 120,
+      "category": "Raita & Salad",
+      "image": "https://lh3.googleusercontent.com/d/1mx6e5I3pC9yYdcIwcQNbiw5CN4CLQrzc",
+      "description": "Creamy whipped yogurt infused with a fresh vibrant blend of mint leaves, green chilies, and coriander."
+    },
+    {
+      "id": "m11_3",
+      "name": "Fresh Kachumar Salad",
+      "price": 150,
+      "category": "Raita & Salad",
+      "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&q=80&w=800",
+      "description": "Traditional Pakistani crunchy salad of finely diced cucumbers, ripe tomatoes, red onions, fresh coriander, and a squeeze of fresh lemon."
+    }
+  ],
+  "orders": [
+    {
+      "id": "o1",
+      "userId": "u2",
+      "customerName": "Sheraz Hussain",
+      "customerPhone": "+92 312 9876543",
+      "items": [
+        {
+          "id": "m1",
+          "name": "Shinwari Mutton Tikka",
+          "price": 1150,
+          "quantity": 1
+        },
+        {
+          "id": "m4",
+          "name": "Namak Mandi Mutton Karahi",
+          "price": 1850,
+          "quantity": 1
+        },
+        {
+          "id": "m6",
+          "name": "Special Roghni Naan",
+          "price": 60,
+          "quantity": 4
+        }
+      ],
+      "subtotal": 3240,
+      "tax": 162,
+      "total": 3402,
+      "type": "table",
+      "tableNumber": "5",
+      "status": "completed",
+      "createdAt": "2026-07-16T05:54:08.209Z"
+    }
+  ],
+  "bookings": [
+    {
+      "id": "b1",
+      "userId": "u2",
+      "name": "Sheraz Hussain",
+      "phone": "+92 312 9876543",
+      "date": "2026-07-20",
+      "time": "19:30",
+      "guests": 4,
+      "status": "confirmed",
+      "createdAt": "2026-07-16T05:54:08.208Z"
+    }
+  ],
+  "settings": {
+    "name": "Deewan Namak Mandi",
+    "location": "Circular Road, near Town Hall, Dera Ismail Khan, Pakistan",
+    "phone": "+92 300 1234567",
+    "email": "orders@deewan.com",
+    "openingHours": "Monday - Sunday: 12:00 PM - 01:00 AM",
+    "whatsappEnabled": true,
+    "whatsappNumber": "+923001234567",
+    "bannerImage": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=1600",
+    "bannerTitle": "Sizzling Namak Mandi Karahi & Charcoal BBQ",
+    "bannerSubtitle": "The Authentic Taste of Dera Ismail Khan"
+  }
+}

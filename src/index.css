@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500&family=Noto+Nastaliq+Urdu:wght@400;700&family=Playball&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-urdu: "Noto Nastaliq Urdu", serif;
+  --font-cursive: "Playball", cursive;
+
+  --color-zinc-950: #060d26; /* Extremely deep royal navy */
+  --color-zinc-900: #0b1539; /* Rich deep blue */
+  --color-zinc-800: #12215c; /* Mid royal blue border/card */
+  --color-zinc-700: #1b2f7d; /* Lighter navy accent */
+  --color-zinc-600: #3b52b3; /* Slate blue */
+  --color-zinc-500: #6d83e3; /* Soft light blue/indigo text */
+  --color-zinc-400: #e2e8f0; /* Crisp light grey/white for readability */
+  --color-black: #020617;    /* Absolute deepest midnight blue */
+}

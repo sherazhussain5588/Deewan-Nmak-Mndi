@@ -1,0 +1,6 @@
+{
+  "name": "Deewan Namak Mandi",
+  "description": "Deewan Namak Mandi - Traditional Taste of D.I Khan. Order premium BBQ, Karahi, and traditional food, book tables, and manage orders with WhatsApp integration.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
