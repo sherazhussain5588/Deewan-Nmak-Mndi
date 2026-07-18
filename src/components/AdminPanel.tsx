@@ -53,6 +53,7 @@ interface AdminPanelProps {
   onAuthSuccess: (user: User, token: string) => void;
   onLogout: () => void;
   setActiveTab: (tab: string) => void;
+  onMenuChange?: () => void;
 }
 
 export default function AdminPanel({
@@ -60,7 +61,8 @@ export default function AdminPanel({
   user,
   onAuthSuccess,
   onLogout,
-  setActiveTab: setGlobalActiveTab
+  setActiveTab: setGlobalActiveTab,
+  onMenuChange
 }: AdminPanelProps) {
   // Sidebar navigation panel selection
   const [activePanel, setActivePanel] = useState<'dashboard' | 'orders' | 'bookings' | 'menu' | 'customers' | 'settings'>('dashboard');
@@ -125,6 +127,22 @@ export default function AdminPanel({
   const [menuSearch, setMenuSearch] = useState('');
   const [menuCategoryFilter, setMenuCategoryFilter] = useState<string>('all');
   const [customerSearch, setCustomerSearch] = useState('');
+
+  // Custom non-blocking alert / confirmation states
+  const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' | 'info' } | null>(null);
+  const [deleteConfirm, setDeleteConfirm] = useState<{
+    type: 'menu' | 'order';
+    id: string;
+    title: string;
+    message: string;
+  } | null>(null);
+
+  const showToast = (message: string, type: 'success' | 'error' | 'info' = 'success') => {
+    setToast({ message, type });
+    setTimeout(() => {
+      setToast(null);
+    }, 4500);
+  };
 
   const isAdmin = user && user.role === 'admin' && token;
 
@@ -260,8 +278,16 @@ export default function AdminPanel({
   };
 
   // Handle Order deletion
-  const handleDeleteOrder = async (orderId: string) => {
-    if (!confirm('Are you sure you want to permanently delete this order? This cannot be undone.')) return;
+  const handleDeleteOrder = (orderId: string) => {
+    setDeleteConfirm({
+      type: 'order',
+      id: orderId,
+      title: 'Delete Order',
+      message: 'Are you sure you want to permanently delete this order? This action is irreversible.'
+    });
+  };
+
+  const executeDeleteOrder = async (orderId: string) => {
     try {
       const response = await fetch(`/api/orders/${orderId}`, {
         method: 'DELETE',
@@ -273,11 +299,13 @@ export default function AdminPanel({
         setOrders(orders.filter(o => o.id !== orderId));
         setSelectedOrder(null);
         setPrevOrdersCount(prev => prev !== null ? prev - 1 : null);
+        showToast('Order permanently deleted', 'success');
       } else {
-        alert('Failed to delete order.');
+        showToast('Failed to delete order.', 'error');
       }
     } catch (err) {
       console.error(err);
+      showToast('An error occurred while deleting the order.', 'error');
     }
   };
 
@@ -304,7 +332,7 @@ export default function AdminPanel({
   const handleMenuSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!menuName || !menuPrice || !menuCategory || !menuImage || !menuDesc) {
-      alert('Please fill out all fields');
+      showToast('Please fill out all fields', 'error');
       return;
     }
 
@@ -334,9 +362,12 @@ export default function AdminPanel({
         if (editingItemId) {
           setMenu(menu.map(m => m.id === editingItemId ? item : m));
           setEditingItemId(null);
+          showToast('Menu item updated successfully!', 'success');
         } else {
           setMenu([...menu, item]);
+          showToast('New menu item added successfully!', 'success');
         }
+        onMenuChange?.();
         // Reset form
         setMenuName('');
         setMenuPrice('');
@@ -344,10 +375,11 @@ export default function AdminPanel({
         setMenuImage('');
         setMenuDesc('');
       } else {
-        alert('Failed to save menu item');
+        showToast('Failed to save menu item', 'error');
       }
     } catch (err) {
       console.error(err);
+      showToast('An error occurred while saving the menu item.', 'error');
     }
   };
 
@@ -363,8 +395,16 @@ export default function AdminPanel({
   };
 
   // Delete Menu Item
-  const handleDeleteMenuItem = async (itemId: string) => {
-    if (!confirm('Are you sure you want to delete this menu item?')) return;
+  const handleDeleteMenuItem = (itemId: string) => {
+    setDeleteConfirm({
+      type: 'menu',
+      id: itemId,
+      title: 'Delete Menu Item',
+      message: 'Are you sure you want to permanently delete this menu item from the restaurant database?'
+    });
+  };
+
+  const executeDeleteMenuItem = async (itemId: string) => {
     try {
       const response = await fetch(`/api/menu/${itemId}`, {
         method: 'DELETE',
@@ -374,9 +414,14 @@ export default function AdminPanel({
       });
       if (response.ok) {
         setMenu(menu.filter(m => m.id !== itemId));
+        onMenuChange?.();
+        showToast('Menu item deleted successfully', 'success');
+      } else {
+        showToast('Failed to delete menu item.', 'error');
       }
     } catch (err) {
       console.error(err);
+      showToast('An error occurred while deleting the menu item.', 'error');
     }
   };
 
@@ -409,12 +454,13 @@ export default function AdminPanel({
       if (response.ok) {
         const updatedSettings = await response.json();
         setSettings(updatedSettings);
-        alert('Restaurant configuration updated successfully!');
+        showToast('Restaurant configuration updated successfully!', 'success');
       } else {
-        alert('Failed to update settings');
+        showToast('Failed to update settings', 'error');
       }
     } catch (err) {
       console.error(err);
+      showToast('An error occurred while updating settings.', 'error');
     }
   };
 
@@ -1754,6 +1800,60 @@ export default function AdminPanel({
         )}
 
       </main>
+
+      {/* Toast Notification */}
+      {toast && (
+        <div className="fixed bottom-6 right-6 z-50 flex items-center space-x-3 bg-[#0c0c0e] border border-zinc-900 px-5 py-4 shadow-2xl">
+          {toast.type === 'success' && <CheckCircle2 className="h-5 w-5 text-emerald-500 shrink-0" />}
+          {toast.type === 'error' && <AlertCircle className="h-5 w-5 text-rose-500 shrink-0" />}
+          {toast.type === 'info' && <AlertCircle className="h-5 w-5 text-amber-500 shrink-0" />}
+          <span className="text-xs font-bold uppercase tracking-wider text-zinc-100">{toast.message}</span>
+          <button onClick={() => setToast(null)} className="text-zinc-600 hover:text-zinc-400 p-1">
+            <X className="h-3 w-3" />
+          </button>
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {deleteConfirm && (
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="w-full max-w-md bg-[#0a0a0c] border border-zinc-900 rounded-none p-6 md:p-8 space-y-6">
+            <div className="flex items-start space-x-4">
+              <div className="p-3 bg-rose-500/10 border border-rose-500/20 text-rose-500 rounded-none shrink-0">
+                <AlertCircle className="h-6 w-6" />
+              </div>
+              <div className="space-y-1.5">
+                <h3 className="text-sm font-bold uppercase tracking-widest text-white">{deleteConfirm.title}</h3>
+                <p className="text-xs text-zinc-500 leading-relaxed">{deleteConfirm.message}</p>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-end space-x-4 pt-4 border-t border-zinc-900">
+              <button
+                onClick={() => setDeleteConfirm(null)}
+                className="px-5 py-2.5 bg-zinc-950 border border-zinc-900 hover:border-zinc-700 text-zinc-400 text-[10px] font-bold uppercase tracking-widest transition"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={async () => {
+                  const { type, id } = deleteConfirm;
+                  setDeleteConfirm(null);
+                  if (type === 'menu') {
+                    await executeDeleteMenuItem(id);
+                  } else if (type === 'order') {
+                    await executeDeleteOrder(id);
+                  }
+                }}
+                className="px-5 py-2.5 bg-rose-600 hover:bg-rose-500 text-white text-[10px] font-bold uppercase tracking-widest transition"
+              >
+                Confirm Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }

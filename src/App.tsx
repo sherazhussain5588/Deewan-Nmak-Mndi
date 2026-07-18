@@ -38,6 +38,13 @@ export default function App() {
 
     // Fetch initial menu
     fetchMenu();
+
+    // Poll for updates every 8 seconds to support real-time sync with edits from other administrators
+    const interval = setInterval(() => {
+      fetchMenu();
+    }, 8000);
+
+    return () => clearInterval(interval);
   }, []);
 
   // Scroll to top of window on tab switch to avoid showing bottom footer
@@ -197,6 +204,7 @@ export default function App() {
               onAuthSuccess={handleAuthSuccess}
               onLogout={handleLogout}
               setActiveTab={setActiveTab}
+              onMenuChange={fetchMenu}
             />
           </div>
         )}
